@@ -1,0 +1,151 @@
+@import '_variable.scss';
+@import '_color.scss';
+@import '_layouts.scss';
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Montserrat';
+    background: map-get($map: $html, $key: bg);
+}
+
+#main {
+    height: 100%;
+    background: map-get($map: $html, $key: bg);
+    color: map-get($map: $html, $key: color);
+    display: grid;
+    grid-template-columns: 10% 90%;
+
+    #menu {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        transition: 0.5s;
+
+        ul {
+            list-style-type: none;
+           
+            li {
+                font-size: 1.7rem;
+                padding: 2 * $padding 0px;
+
+                @include mobile() {
+                    font-size: 1rem;
+                    padding: $padding 0px;
+                }
+
+                i {
+                    transition: .5s;
+                    cursor: pointer;
+                    &:hover {
+                        color: map-get($map: $html, $key: gray);
+                    }
+                }
+            }
+        }
+    }
+
+    .content {
+        position: relative;
+        overflow: hidden;
+        font-size: 2rem;
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0;
+            visibility: hidden;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            flex-direction: column;
+
+            &:nth-child(2) {
+
+                background: map-get($map: $html, $key: bg-type);
+            }
+
+            &:nth-child(3) {
+
+                background: map-get($map: $html, $key: bg-coffee);
+            }
+
+            &:nth-child(4) {
+
+                background: map-get($map: $html, $key: bg-dribble);
+            }
+
+            #icon {
+                font-size: 2.5rem;
+            }
+        }
+    }
+
+}
+
+.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+.hidden-from-left-to-right{
+
+    animation: hidden_from_left_to_right 1s forwards;
+}
+
+.visiable-from-right-to-left {
+    animation: visiable_from_right_to_left 1s forwards;
+}
+
+@-webkit-keyframes hidden_from_left_to_right {
+
+    0%{
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0%);
+    }
+
+    100%{
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(100%);
+    }
+}
+
+@-webkit-keyframes visiable_from_right_to_left {
+    0%{
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0%);
+    }
+}
+.zoom {
+    color: #fff;
+    transform: scale(2);
+
+    @include mobile() {
+        transform: scale(1.5);
+    }
+    transition: .5s;
+}
+
+.-bg-change {
+    background: map-get($map: $html, $key: bg-change);
+    transition: 0.5s;
+}
